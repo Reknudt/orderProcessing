@@ -191,15 +191,9 @@ public class StreamsProcessor {
                 .peek((key, json) -> System.out.println("To DLQ: " + key))
                 .to("dlq-jsons", Produced.with(Serdes.String(), stringSerde));
 
-//        // 2. State Store для запросов
-//        StoreBuilder<KeyValueStore<String, String>> storeBuilder = Stores.keyValueStoreBuilder(
-//                Stores.persistentKeyValueStore("validated-jsons-store"),
-//                Serdes.String(),
-//                stringSerde);
+        System.out.println("!!! 2. Создаем validated-jsons store");
 
-        System.out.println("!!! 2. Создаем jsons store");
-
-        // 3. KTable для хранения последнего состояния по ключу
+        // 2. KTable для хранения последнего состояния по ключу
         KTable<String, String> jsonTable = builder.stream("validated-jsons", Consumed.with(Serdes.String(), stringSerde))
                 .toTable(Materialized.<String, String, KeyValueStore<Bytes, byte[]>>as("validated-jsons-store")
                         .withKeySerde(Serdes.String())
