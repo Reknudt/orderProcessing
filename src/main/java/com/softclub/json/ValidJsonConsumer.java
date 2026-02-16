@@ -16,7 +16,7 @@ public class ValidJsonConsumer {
     /**
      * Обработка валидных json'ов
      */
-    @Incoming("validated-jsons")
+    @Incoming("validated-jsons-in")
     public void process(String json) {
         try {
             JsonObject jsonObject = Json.createReader(new StringReader(json)).readObject();
@@ -27,7 +27,7 @@ public class ValidJsonConsumer {
         }
     }
 
-    @Incoming("dlq-jsons")
+    @Incoming("dlq-jsons-in")
     public void dlqProcess(String json) {
         try {
             JsonObject jsonObject = Json.createReader(new StringReader(json)).readObject();
@@ -36,5 +36,10 @@ public class ValidJsonConsumer {
         } catch (Exception e) {
             LOG.infof("DLQ, Ошибка обработки json ", e);
         }
+    }
+
+    @Incoming("jsons-in-jsons")
+    public void getAllMessages(String json) {
+        LOG.infof("Message received for JSONS topic, json = %s", json);
     }
 }

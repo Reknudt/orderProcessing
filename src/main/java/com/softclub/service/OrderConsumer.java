@@ -50,7 +50,7 @@ public class OrderConsumer {
                 LOG.infof("Заказ %s передан в обработку", order.getId());
                 break;
             case COMPLETED:
-                LOG.infof("Заказ %s выполнен. Сумма: %.2f", 
+                LOG.infof("Заказ %s выполнен. Сумма: %.2f",
                     order.getId(), order.getAmount());
                 break;
             case CANCELLED:

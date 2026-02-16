@@ -18,11 +18,13 @@ public class JsonProducer {
     @Channel("validated-jsons-out")
     Emitter<ProducerRecord<String, String>> validatedJsonEmitter;
 
+//    @Channel("jsons-in-jsons")
+//    Emitter<ProducerRecord<String, String>> jsonEmitter;
+
     public String sendRawJsonScheme(String jsonPayload) {
         try {
 //            LocalDateTime now = LocalDateTime.now();
-            String now = UUID.randomUUID().toString();
-            String key = now;
+            String key = UUID.randomUUID().toString();  // key should be random of timestamp + props
 
             emitter.send(new ProducerRecord<>("validated-jsons", key, jsonPayload));
             System.out.println("Sent raw JSON with key: " + key);
@@ -35,8 +37,7 @@ public class JsonProducer {
     public String sendValidatedJsonScheme(String jsonPayload) {
         try {
 //            LocalDateTime now = LocalDateTime.now();
-            String now = UUID.randomUUID().toString();
-            String key = now;
+            String key = UUID.randomUUID().toString(); // key should be random of timestamp + props
 
             validatedJsonEmitter.send(new ProducerRecord<>("jsons", key, jsonPayload));
             System.out.println("Sent raw JSON with key: " + key);
