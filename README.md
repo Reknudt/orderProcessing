@@ -1,7 +1,40 @@
 # cbr-test
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+## Start
 
+1. Package application with:
+```bash
+./mvnw package
+```
+2. Run packaged .jar of application
+```bash
+java -jar target/quarkus-app/quarkus-run.jar
+```
+3. Run kafka with kafka-ui locally
+```bash
+bash start-kafka.sh
+```
+
+
+## Testing
+
+To test jsons API send json object
+
+```bash
+curl -X POST http://localhost:18080/jsons/ -H "Content-Type: application/json"   -d '{
+    "product": "two-topics test 4",
+    "quantity": 1,
+    "amount": 9.99
+  }'
+```
+
+Then get by key or get ALL
+
+```bash
+curl http://localhost:18080/jsons/
+```
+
+This project uses Quarkus, the Supersonic Subatomic Java Framework.
 If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
 
 ## Running the application in dev mode

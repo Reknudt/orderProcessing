@@ -4,7 +4,7 @@ set -e
 echo "=== Запуск Kafka и зависимостей ==="
 
 # 1. Запускаем контейнеры
-cd src/main/docker
+#cd src/main/docker
 docker-compose up -d
 
 echo "Ожидание запуска Kafka..."
